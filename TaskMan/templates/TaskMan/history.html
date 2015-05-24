@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% block history %}
+  <div class="row">
+   {% if log %}
+   <center  style="margin-top:100px;">
     {% for l in log %}
         <p>{{l.object_repr}} is changed by {{ l.user.user_name }}, status: {{ l.change_message }}</p>
     {% endfor %}
+    </center>
+   {% else %}
+    <center style="margin-top:100px;">
+        NO HISTORY
+     </center>
+   {% endif %}
+   </div>
 {% endblock %}

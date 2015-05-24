@@ -18,7 +18,7 @@ class TaskTestCase(TestCase):
         self.assertNotEqual(second.task, 'Second Test Case , Not match')
         
     def test_home(self):
-        resp = self.client.get('/home/')
+        resp = self.client.get('/')
         self.assertEqual(resp.status_code, 200)
         self.assertTrue('all_tasks' in resp.context)
         aa = [task.pk for task in resp.context['all_tasks']]
@@ -44,6 +44,4 @@ class TaskTestCase(TestCase):
     
     def test_create_task(self):
         resp = self.client.get('/taskman/create_tasks/')
-        self.assertEqual(resp.status_code, 200)
-        resp = self.client.post('/taskman/create_tasks/', {'username': 'avx@gmail.com', 'password': '12345'})
         self.assertEqual(resp.status_code, 200)

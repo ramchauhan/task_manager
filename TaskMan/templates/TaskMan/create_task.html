@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 {% block create_task %}
+ <div class="row">
+  <center>
     <h1>Create task with TaskMan</h1>
-        <strong>Create task here!</strong><br />
-        <form id="user_form" method="post" action="/taskman/create_tasks/">
+        <br />
+        <form id="user_form1" method="post" action="/taskman/create_tasks/">
             {% csrf_token %}
             {{ task_form.as_p }}
-            <input type="submit" name="submit" value="Create Task" />
+            <br />
+            <input type="submit" class="btn btn-primary" name="submit" value="Create Task" />
         </form>
+  </center>
+ </div>
 {% endblock %}
 

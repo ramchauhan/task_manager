@@ -1,12 +1,16 @@
 {% extends "base.html" %}Login to TaskMan</h1>
 {% block user_login %}
-    <br />
+ <div class="row">
+   <center style="margin-top:100px;">
+    <p>Enter Your Email Id amd Password</p><br />
     <form id="login_form" method="post" action="/taskman/login/">
         {% csrf_token %}
-        EMail: <input type="text" name="username" value="" size="50" />
-        <br />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
+        EMail:&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; <input type="text" name="username" value="" size="50" />
+        <br /><br />
+        Password: &nbsp;<input type="password" name="password" value="" size="50" />
+        <br /><br /><br /><br />
+        <input class="btn btn-primary" type="submit" value="submit" />
     </form>
+  </center>
+ <div class="row">
 {% endblock %}

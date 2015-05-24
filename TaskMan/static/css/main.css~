@@ -1,0 +1,10 @@
+#user_form #id_email{margin-left:125px;}
+#user_form #id_user_name{margin-left:95px;}
+#user_form #id_password1{margin-left:103px;}
+#user_form #id_password2{margin-left:15px;}
+#user_form1 #id_is_completed{margin-left:160px;}
+#user_form1 #id_task{margin-left:100px;}
+#user_form1 #id_dead_line_date_month{margin-left:71px;}
+.links{padding:20px;}
+.links span{padding:20px;}
+.links span a{font-size:20px;}

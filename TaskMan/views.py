@@ -61,7 +61,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect('/home/')
+    return HttpResponseRedirect('/')
         
 def create_task(request):
     
@@ -91,12 +91,16 @@ class UserTasksView(ListView):
     def get_context_data(self, **kwargs):
         context = super(UserTasksView, self).get_context_data(**kwargs)
         return context
-        
+ 
+def home(request):
+    context = RequestContext(request)
+    return render_to_response('TaskMan/home.html', {}, context)
+    
     
 class TasksDetailView(ListView):
     
     model = Tasks
-    template_name = 'TaskMan/home.html'
+    template_name = 'TaskMan/tasks.html'
     context_object_name = 'all_tasks'
    
     def get_context_data(self, **kwargs):

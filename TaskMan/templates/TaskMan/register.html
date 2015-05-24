@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 {% block user_register %}
-    <h1>Register with TaskMan</h1>
+   <div class="row">
+    <div class="span12">
+    <center>
+    <h1>Register with TaskMan</h1><br />
     {% if registered %}
         <strong>thank you for registering!</strong>
         <a href="#">Return to the homepage.</a><br />
     {% else %}
-        <strong>register here!</strong><br />
         <form id="user_form" method="post" action="/taskman/register/">
             {% csrf_token %}
             {{ user_form.as_p }}
-            <input type="submit" name="submit" value="Register" />
+            <br />
+            <input type="submit" class="btn btn-primary" name="submit" value="Register" />
         </form>
     {% endif %}
+    </center>
+    </div>
+    </div>
 {% endblock %}
 

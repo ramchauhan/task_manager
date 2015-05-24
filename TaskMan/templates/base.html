@@ -10,31 +10,88 @@
     <meta name="description" content="">
     <meta name="author" content="">
 {% endblock %}
-{% comment %}
 {% block css %}
-    <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+    {% comment %}
+    <style type="text/css">
+      #user_form #id_email{margin-left:125px;}
+      #user_form #id_user_name{margin-left:95px;}
+      #user_form #id_password1{margin-left:103px;}
+      #user_form #id_password2{margin-left:15px;}
+      #user_form1 #id_is_completed{margin-left:160px;}
+      #user_form1 #id_task{margin-left:100px;}
+      #user_form1 #id_dead_line_date_month{margin-left:71px;}
+      .links{padding:20px;}
+      .links span{padding:20px;}
+      .links span a{font-size:20px;}
+    </style>
+    {% endcomment %}
 {% endblock %}
-{% endcomment %}
 {% block js %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="{% static 'javascript/ajax_request.js' %}" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/static/javascript/ajax_request.js" type="text/javascript"></script>
+    {% comment %}
+    <script type="text/javascript">
+    $(document).ready(function(){
+  $('#sort_task').on('click', function(){
+	var sort_key = $('#sort_by_kay').find('option:selected').val();
+    var all_task = $('.task_wraper').find('.task_lists');
+	$.ajax({
+	  type: 'GET',
+	  url: '/taskman/tasks/sort',
+	  data: {sort_key : sort_key },
+	  success: function(result) {
+		 $(all_task).remove();
+		 $.each(result, function(i,item){
+	var lists = $('<div class="task_lists" style="width:100%; float:left;"></div>');
+    $(lists).append('<span class="task_name" style="width:17%; margin-right:4%;float:left;">'+item.name+'</span>');
+    $(lists).append('<span class="task_created_date" style="width:17%; margin-right:4%;float:left;">'+item.created_date+'</span>');
+	$(lists).append('<span class="dead_line_date" style="width:17%; margin-right:4%;float:left;">'+item.deat_line_date+'</span>');
+	if(item.status == 'INC'){
+      $(lists).append('<span class="task_status" style="width:17%; margin-right:3%;float:left;">Not Completed</span>');
+	}
+	else{
+	  $(lists).append('<span class="task_status" style="width:17%; margin-right:3%;float:left;">Completed</span>');
+	}   
+	$(lists).append('<span class="task_edit" style="width:17%; margin-right:0%;float:left;"><a href="/taskman/delete/'+item.task_id+'">Delete</a></span>')
+    $('.task_wraper').append($(lists));
+	 });
+	 }
+	});
+  });
+});
+    </script>
+    {% endcomment %}
 {% endblock %}
 <title>{% block title %}TaskMan{% endblock %}</title>
 </head>
 <body style="width:100%;">
+<div class="container">
     {% block user_links %}
-    <div class="links" style="width:100%;display:block;text-align: center;">
-         <span class="home_link" style="padding:3px;"><a href="{% url 'home' %}">Home</a></span>
+    <div class="links nav navbar-nav" style="width:100%;display:block;text-align: center;">
         {% if request.user.is_active %}
-            <span class="create_task_link" style="padding:3px;"><a href="{% url 'create_tasks' %}">Create Task</a></span>
-            <span class="user_logout_link" style="padding:3px;"><a href="{% url 'logout' %}">Logout</a></span>
-            <span class="user_created_task_link" style="padding:3px;"><a href="{% url 'user_tasks' %}">your Tasks</a></span>
+            <span class="create_task_link"><a href="{% url 'create_tasks' %}">Create Task</a></span>
+            <span class="user_logout_link"><a href="{% url 'logout' %}">Logout</a></span>
+            <span class="user_created_task_link"><a href="{% url 'user_tasks' %}">your Tasks</a></span>
         {% else %}
-            <span class="user_login_link" style="padding:3px;"><a href="{% url 'login' %}">Login</a></span>
-            <span class="user_register_link" style="padding:3px;"><a href="{% url 'register' %}">Register</a></span>
-            <span class="history_link" style="padding:3px;"><a href="{% url 'history' %}">History</a></span>
+            <span class="user_login_link"><a href="{% url 'login' %}">Login</a></span>
+            <span class="user_register_link"><a href="{% url 'register' %}">Register</a></span>
+            <span class="history_link"><a href="{% url 'history' %}">History</a></span>
+            <span class="home_link"><a href="{% url 'home' %}">Home</a></span>
         {% endif %}
+        <span class="all_tasks"><a href="{% url 'tasks' %}">All Tasks</a></span>
     </div>
+    {% if request.user.is_active %}
+    <div class="row">
+       <span style="float:right;width:200px; height:100px; margin-right: 50px;">
+          <h5>Logged In As: {{ request.user.user_name }}</h5>
+       </span>
+    </div>
+    {% endif %}
+    
+    
     {% endblock %}
     {% block all_task %}
     {% endblock %}
@@ -52,5 +109,8 @@
     {% endblock %}
     {% block history %}
     {% endblock %}
+    {% block home %}
+    {% endblock %}
+</div>
 </body> 
 </html>

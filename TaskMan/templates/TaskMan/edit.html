@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block edit_task %}
     {% if available_tasks %}
+    <div class="row">
         <div class="task_list" width="100%;">
-            <div class="all_task_wraper" style="width:100%">
+            <div class="all_task_wraper" style="width:100%; float:left;margin-bottom:20px;">
                 <span class="task_name" style="width:30%; margin-right:5%;float:left;"><h4>Task Name</h4></span>
                 <span class="task_crated_date" style="width:30%; margin-right:5%;float:left;"><h4>Task Created Date</h4></span>
                 <span class="task_status" style="width:30%; margin-right:0%;float:left;"><h4>Status</h4></span>
@@ -10,11 +11,11 @@
              <form id="update_tasks" method="post" action="/taskman/tasks/update/">
              {% csrf_token %}
             {% for task in available_tasks %}
-                <div class="task_{{task.id}}" style="width:100%">
+                <div class="task_{{task.id}}" style="width:100%; margin-bottom:10px;">
                     <span class="task_name" style="width:30%; margin-right:5%;float:left;">{{ task.task }}</span>
                     <span class="task_created_date" style="width:30%; margin-right:5%;float:left;">{{ task.created_date }}</span>
                     <span class="task_status" style="width:30%; margin-right:0%;float:left;">
-                        <select name="getlist_val">
+                        <select name="getlist_val" class="btn btn-default btn-sm dropdown-toggle">
                             <option value="COM_{{task.id}}" {% if task.is_completed == 'CON' %}selected{% endif %}>
                                 Completed
                             </option>
@@ -25,10 +26,13 @@
                     </span>
                 </div>
             {% endfor %}
-              <input type="submit" value="UPDATE" style="width:100px;margin:20px 0px 20px 100px; "/>
+            <center>
+              <input type="submit" value="UPDATE" class="btn btn-primary"/>
+            </center>
             </form>
         </div>
     {% else %}
         No Task Created By you
     {% endif %}
+    </div>
 {% endblock %}

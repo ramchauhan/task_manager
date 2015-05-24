@@ -3,12 +3,13 @@ from django.contrib import admin
 
 from TaskMan.views import TasksDetailView, register_user, user_login, user_logout, \
                           create_task, UserTasksView, DeleteTaskView, TasksEditView, TaskUpdateView, \
-                          tasks_sort_view, tasks_collection, task_detail, history_view
+                          tasks_sort_view, tasks_collection, task_detail, history_view, home
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^history/$', history_view, name='history'),
-    url(r'^$', TasksDetailView.as_view(), name='home'),
+    url(r'^$', home, name='home'),
+    url(r'^taskman/tasks/$', TasksDetailView.as_view(), name='tasks'),
     url(r'^taskman/register/$', register_user, name='register'),
     url(r'^taskman/login/$', user_login, name='login'),
     url(r'^logout/$', user_logout, name='logout'),
