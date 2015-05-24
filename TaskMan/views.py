@@ -51,7 +51,7 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect('/taskman/user_tasks/', )
             else:
-                return HttpResponse("Your Rango account is disabled.")
+                return HttpResponse("Your account is disabled.")
         else:
             print "Invalid login details: {0}, {1}".format(email, password)
             return HttpResponse("Invalid login details supplied.")
