@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block user_task %}
+    {% if user_tasks %}
+        <div class="task_wraper" style="width:100%;float:left;">
+            <div class="task_headers" style="width:100%">
+                <span class="task_name" style="width:17%; margin-right:4%;float:left;"><h4>Task Name</h4></span>
+                <span class="task_crated_date" style="width:17%; margin-right:4%;float:left;"><h4>Task Created Date</h4></span>
+                <span class="dead_line_date" style="width:17%; margin-right:4%;float:left;"><h4>Dead Line Date</h4></span>
+                <span class="task_status" style="width:17%; margin-right:3%;float:left;"><h4>Status</h4></span>
+                <span class="task_status" style="width:17%; margin-right:0%;float:left;"><h4>Delete task</h4></span>
+            </div>
+        {% for task in user_tasks %}
+         <div class="task_lists" style="width:100%; float:left;">
+            <span class="task_name" style="width:17%; margin-right:4%;float:left;">{{ task.task }}</span>
+            <span class="task_created_date" style="width:17%; margin-right:4%;float:left;">
+                {{ task.created_date|date:"d M, Y" }}
+            </span>
+            <span class="dead_line_date" style="width:17%; margin-right:4%;float:left;">
+                {{ task.dead_line_date|date:"d M, Y" }}
+            </span>
+            <span class="task_status" style="width:17%; margin-right:3%;float:left;">
+             {% if task.is_completed == 'INC' %}
+                Not Completed
+             {% else %}
+                Completed
+             {% endif %}
+            </span>
+            <span class="task_edit" style="width:17%; margin-right:0%;float:left;">
+                <a href="/taskman/delete/{{task.id}}">Delete</a>
+            </span>
+         </div>
+        {% endfor %}
+        </div>
+        <div class="edit_link" style="width:100%;margin:20px 0px;text-align:center;float:left;">
+            <a href="/taskman/tasks/edit/">Edit Tesks</a>
+        </div>
+        <select id="sort_by_kay">
+            <option value="Name" selected>By Name</option>
+            <option value="Completed_date">By Completed Date</option>
+            <option value="Added_date">By Added Date</option>
+        </select>
+    <input id="sort_task" type="submit" value="Sort Task" style="width:100px;margin:20px 0px 20px 100px; "/>
+    {% else %}
+        No Task Created By you
+    {% endif %}
+{% endblock %}
+
+
+

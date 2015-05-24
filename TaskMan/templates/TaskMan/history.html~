@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block history %}
+    {% for l in log %}
+        <p>{{l.object_repr}} is changed by {{ l.user.user_name }}, status: {{ l.change_message }}</p>
+    {% endfor %}
+{% endblock %}

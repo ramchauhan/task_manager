@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block all_task %}
+    {% if all_tasks %}
+        <div class="all_task" style="width:100%">
+            <h3>All Tasks</h3>
+            <div class="all_task_wraper" style="width:100%">
+                <span class="task_name" style="width:20%; margin-right:7%;float:left;"><h4>Task Name</h4></span>
+                <span class="task_crated_date" style="width:20%; margin-right:7%;float:left;"><h4>Task Created Date</h4></span>
+                <span class="dead_line_date" style="width:20%; margin-right:7%;float:left;"><h4>Dead Line Date</h4></span>
+                <span class="task_status" style="width:19%; margin-right:0%;float:left;"><h4>Status</h4></span>
+            </div>
+            {% for item in all_tasks %}
+            <div class="all_task_wraper" style="width:100%">
+                <span class="task_name" style="width:20%; margin-right:7%;float:left;">{{ item.task }}</span>
+                <span class="task_crated_date" style="width:20%; margin-right:7%;float:left;">
+                    {{ item.created_date|date:"d M, Y" }}
+                </span>
+                <span class="dead_line_date" style="width:20%; margin-right:7%;float:left;">
+                    {{ item.dead_line_date|date:"d M, Y" }}
+                </span>
+                <span class="task_status" style="width:19%; margin-right:0%;float:left;">
+                    {% if item.is_completed == 'INC' %} Not Completed{% else %}Completed{% endif %}
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        There is No task! please Create task
+    {% endif %}
+{% endblock %}
+
+
+

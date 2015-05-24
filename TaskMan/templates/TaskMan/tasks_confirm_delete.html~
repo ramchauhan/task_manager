@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block delete_task %}
+<div class="delete_task" style="width=100%;text-align:center;">
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm" />
+    </form>
+    <div class="user_tasks" style="padding:3px;"><a href="{% url 'user_tasks' %}">Login</a></span>
+</div>
+{% endblock %}

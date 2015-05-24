@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block create_task %}
+    <h1>Create task with TaskMan</h1>
+        <strong>Create task here!</strong><br />
+        <form id="user_form" method="post" action="/taskman/create_tasks/">
+            {% csrf_token %}
+            {{ task_form.as_p }}
+            <input type="submit" name="submit" value="Create Task" />
+        </form>
+{% endblock %}
+
